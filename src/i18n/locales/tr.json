@@ -1,0 +1,41 @@
+{
+  "HOME": { "TITLE": "Add Participant", "ADD": "Ekle" },
+  "HEADER": {
+    "TITLE": "Katılımcı Bilgisi Ekle"
+  },
+  "FORM": {
+    "EMAIL": "E-posta Adresi",
+    "SALUTATION": "Hitap Şekli",
+    "SALUTATION_MR": "Bay",
+    "SALUTATION_MRS": "Bayan",
+    "FIRST_NAME": "Ad",
+    "LAST_NAME": "Soyad",
+    "ADDRESS": "Adres",
+    "POSTAL_CODE": "Posta Kodu",
+    "CITY": "Şehir",
+    "COUNTRY": "Ülke",
+    "PHONE": "Telefon Numarası",
+    "MOBILE": "Cep Telefonu",
+    "TITLE": "tectrain Bültenini de takip edin.",
+    "CHECK": "Sertifika kursları için gerekli bilgiler",
+    "SAVE": "Kaydet",
+    "SUCCESS": "Hesap eklendi.",
+    "FAIL": "Form gönderme hatası:"
+  },
+  "VALIDATIONS": {
+    "FIRST_NAME_REQUIRED": "Ad alanı zorunludur",
+    "FIRST_NAME_INVALID": "Geçerli bir ad giriniz",
+    "LAST_NAME_REQUIRED": "Soyad alanı zorunludur",
+    "LAST_NAME_INVALID": "Geçerli bir soyad giriniz",
+    "EMAIL_REQUIRED": "E-posta alanı zorunludur",
+    "EMAIL_INVALID": "Geçerli bir e-posta adresi giriniz",
+    "PHONE_REQUIRED": "Telefon numarası zorunludur",
+    "CITY_REQUIRED": "Şehir alanı zorunludur",
+    "ADDRESS_REQUIRED": "Adres alanı zorunludur",
+    "COUNTRY_REQUIRED": "Ülke alanı zorunludur",
+    "GENDER_REQUIRED": "Cinsiyet seçimi zorunludur",
+    "POSTAL_CODE_REQUIRED": "Posta kodu zorunludur",
+    "POSTAL_CODE_INVALID": "Geçerli bir posta kodu giriniz",
+    "TERMS_CONDITIONS": "Kullanım koşullarını kabul etmelisiniz"
+  }
+}

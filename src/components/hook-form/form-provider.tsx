@@ -1,13 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CSSProperties } from "react";
 import { UseFormReturn, FormProvider as Form } from "react-hook-form";
 
-interface FormValues {
-  [key: string]: unknown;
-}
-
 type Props = {
   children: React.ReactNode;
-  methods: UseFormReturn<FormValues>;
+  methods: UseFormReturn<any>;
   onSubmit?: VoidFunction;
   style?: CSSProperties;
 };

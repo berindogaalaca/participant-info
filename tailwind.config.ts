@@ -12,6 +12,7 @@ export default {
     extend: {
       fontFamily: {
         raleway: ["var(--font-raleway)"],
+        lato: ["var(--font-lato)"],
       },
       colors: {
         background: "hsl(var(--background))",

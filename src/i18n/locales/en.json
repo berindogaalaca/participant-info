@@ -1,0 +1,41 @@
+{
+  "HOME": { "TITLE": "Add Participant", "ADD": "Add" },
+  "HEADER": {
+    "TITLE": "Add Participant Information"
+  },
+  "FORM": {
+    "EMAIL": "E-mail Address",
+    "SALUTATION": "Salutation",
+    "SALUTATION_MR": "Mr",
+    "SALUTATION_MRS": "Mrs",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "ADDRESS": "Address",
+    "POSTAL_CODE": "Postal Code",
+    "CITY": "City",
+    "COUNTRY": "Country",
+    "PHONE": "Phone Number",
+    "MOBILE": "Mobile Number",
+    "TITLE": "Also follow tectrain Newsletter.",
+    "CHECK": "Information required for certificate courses",
+    "SAVE": "Save",
+    "SUCCESS": "Account added.",
+    "FAIL": "Form submission error:"
+  },
+  "VALIDATIONS": {
+    "FIRST_NAME_REQUIRED": "First name is required",
+    "FIRST_NAME_INVALID": "Please enter a valid first name",
+    "LAST_NAME_REQUIRED": "Last name is required",
+    "LAST_NAME_INVALID": "Please enter a valid last name",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Please enter a valid email address",
+    "PHONE_REQUIRED": "Phone number is required",
+    "CITY_REQUIRED": "City is required",
+    "ADDRESS_REQUIRED": "Address is required",
+    "COUNTRY_REQUIRED": "Country is required",
+    "GENDER_REQUIRED": "Gender selection is required",
+    "POSTAL_CODE_REQUIRED": "Postal code is required",
+    "POSTAL_CODE_INVALID": "Please enter a valid postal code",
+    "TERMS_CONDITIONS": "You must accept the terms and conditions"
+  }
+}

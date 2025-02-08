@@ -1,0 +1,41 @@
+{
+  "HOME": { "TITLE": "Add Participant", "ADD": "Hinzufügen" },
+  "HEADER": {
+    "TITLE": "Add Participant Info"
+  },
+  "FORM": {
+    "EMAIL": "E-Mail-Adresse",
+    "SALUTATION": "Anrede",
+    "SALUTATION_MR": "Herr",
+    "SALUTATION_MRS": "Frau",
+    "FIRST_NAME": "Vorname",
+    "LAST_NAME": "Nachname",
+    "ADDRESS": "Adresse",
+    "POSTAL_CODE": "Postleitzahl",
+    "CITY": "Stadt",
+    "COUNTRY": "Land",
+    "PHONE": "Telefonnummer",
+    "MOBILE": "Handynummer",
+    "TITLE": "Auch den tectrain Newsletter abonnieren.",
+    "CHECK": "Informationen für Zertifikatskurse erforderlich",
+    "SAVE": "Speichern",
+    "SUCCESS": "Konto hinzugefügt.",
+    "FAIL": "Fehler bei der Formularübermittlung:"
+  },
+  "VALIDATIONS": {
+    "FIRST_NAME_REQUIRED": "Vorname ist erforderlich",
+    "FIRST_NAME_INVALID": "Bitte geben Sie einen gültigen Vornamen ein",
+    "LAST_NAME_REQUIRED": "Nachname ist erforderlich",
+    "LAST_NAME_INVALID": "Bitte geben Sie einen gültigen Nachnamen ein",
+    "EMAIL_REQUIRED": "E-Mail ist erforderlich",
+    "EMAIL_INVALID": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "PHONE_REQUIRED": "Telefonnummer ist erforderlich",
+    "CITY_REQUIRED": "Stadt ist erforderlich",
+    "ADDRESS_REQUIRED": "Adresse ist erforderlich",
+    "COUNTRY_REQUIRED": "Land ist erforderlich",
+    "GENDER_REQUIRED": "Geschlechtsauswahl ist erforderlich",
+    "POSTAL_CODE_REQUIRED": "Postleitzahl ist erforderlich",
+    "POSTAL_CODE_INVALID": "Bitte geben Sie eine gültige Postleitzahl ein",
+    "TERMS_CONDITIONS": "Sie müssen die Nutzungsbedingungen akzeptieren"
+  }
+}

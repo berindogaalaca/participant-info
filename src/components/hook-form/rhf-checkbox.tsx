@@ -1,81 +1,50 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import { Checkbox } from "../ui/checkbox";
-import { FormItem, FormLabel, FormMessage } from "../ui/form";
+"use client";
 
-interface RHFCheckboxProps {
+import type * as React from "react";
+import { useFormContext } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+interface RHFCheckboxProps
+  extends React.ComponentPropsWithoutRef<typeof Checkbox> {
   name: string;
   label?: string;
-  helperText?: string;
+  children?: React.ReactNode;
 }
 
-export function RHFCheckbox({ name, label, helperText }: RHFCheckboxProps) {
-  const { control } = useFormContext();
-
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <FormItem>
-          <Checkbox
-            checked={field.value}
-            onChange={field.onChange}
-            label={label}
-          />
-          {helperText && <FormMessage>{helperText}</FormMessage>}
-        </FormItem>
-      )}
-    />
-  );
-}
-
-interface RHFMultiCheckboxProps {
-  name: string;
-  options: { label: string; value: any }[];
-  label?: string;
-  helperText?: string;
-  row?: boolean;
-}
-
-export function RHFMultiCheckbox({
+export function RHFCheckbox({
   name,
-  options,
   label,
-  helperText,
-  row = false,
-}: RHFMultiCheckboxProps) {
+  children,
+  ...other
+}: RHFCheckboxProps) {
   const { control } = useFormContext();
 
   return (
-    <Controller
-      name={name}
+    <FormField
       control={control}
-      render={({ field, fieldState: { error } }) => (
-        <FormItem>
-          {label && <FormLabel>{label}</FormLabel>}
-          <div className={row ? "flex gap-4" : "space-y-2"}>
-            {options.map((option) => (
-              <Checkbox
-                key={option.value}
-                checked={field.value.includes(option.value)}
-                onChange={(checked) => {
-                  if (checked) {
-                    field.onChange([...field.value, option.value]);
-                  } else {
-                    field.onChange(
-                      field.value.filter((value: any) => value !== option.value)
-                    );
-                  }
-                }}
-                label={option.label}
-              />
-            ))}
-          </div>
-          {(error || helperText) && (
-            <FormMessage>{error ? error.message : helperText}</FormMessage>
+      name={name}
+      render={({ field }) => (
+        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md">
+          <FormControl>
+            <Checkbox
+              checked={field.value}
+              onCheckedChange={field.onChange}
+              {...other}
+            />
+          </FormControl>
+          {(label || children) && (
+            <FormLabel className="font-normal cursor-pointer">
+              {label || children}
+            </FormLabel>
           )}
+          <FormMessage className="text-xs" />
         </FormItem>
       )}
     />

@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+/* eslint-disable @typescript-eslint/no-require-imports */
+const createNextIntlPlugin = require("next-intl/plugin");
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+const withNextIntl = createNextIntlPlugin();
 
-export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+module.exports = withNextIntl(nextConfig);
