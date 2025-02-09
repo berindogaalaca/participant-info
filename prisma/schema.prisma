@@ -9,26 +9,29 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id                  String     @id @default(cuid())
-  first_name          String     
-  last_name           String
-  email               String     @unique
-  phone               String
-  mobile              String
-  gender              String
-  city                String
-  address             String
-  country             String
-  postalCode          String
-  newsletter_name     String
-  newsletter_email    String
-  newsletter_gender   String
-  isCheck             Boolean
-  createdAt           DateTime   @default(now())
-  updatedAt           DateTime   @updatedAt
+model User {
+  id                String   @id @default(uuid()) @db.VarChar(36)
+  first_name        String   @db.VarChar(50)
+  last_name         String   @db.VarChar(50)
+  email             String   @unique @db.VarChar(191)  
+  phone             String   @db.VarChar(20)
+  mobile            String   @db.VarChar(20)
+  gender            String   @db.VarChar(10)
+  city              String   @db.VarChar(50)
+  address           String   @db.Text
+  country           String   @db.VarChar(50)
+  postalCode        String   @db.VarChar(20)
+  newsletter_name   String   @db.VarChar(50)
+  newsletter_email  String   @db.VarChar(191)
+  newsletter_gender String   @db.VarChar(10)
+  isCheck          Boolean  @default(false)
+  createdAt        DateTime @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime @updatedAt @db.Timestamp(6)
+
+  @@index([email])
+  @@map("users")
 }

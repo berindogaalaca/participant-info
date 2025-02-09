@@ -20,7 +20,10 @@
     "CHECK": "Information required for certificate courses",
     "SAVE": "Save",
     "SUCCESS": "Account added.",
-    "FAIL": "Form submission error:"
+    "FAIL": "Form submission error:",
+    "DELETE": "Delete",
+    "DELETE_SUCCESS": "User successfully deleted",
+    "DELETE_FAIL": "Failed to delete user"
   },
   "VALIDATIONS": {
     "FIRST_NAME_REQUIRED": "First name is required",

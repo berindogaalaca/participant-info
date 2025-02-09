@@ -20,7 +20,10 @@
     "CHECK": "Sertifika kursları için gerekli bilgiler",
     "SAVE": "Kaydet",
     "SUCCESS": "Hesap eklendi.",
-    "FAIL": "Form gönderme hatası:"
+    "FAIL": "Form gönderme hatası:",
+    "DELETE": "Sil",
+    "DELETE_SUCCESS": "Kullanıcı başarıyla silindi",
+    "DELETE_FAIL": "Kullanıcı silme işlemi başarısız oldu"
   },
   "VALIDATIONS": {
     "FIRST_NAME_REQUIRED": "Ad alanı zorunludur",

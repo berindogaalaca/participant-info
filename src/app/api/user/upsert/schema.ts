@@ -44,6 +44,6 @@ export const createUserSchema = z.object({
 
   newsletter_gender: z.string().min(1, "VALIDATIONS.GENDER_REQUIRED"),
 
-  isCheck: z.boolean(),
+  isCheck: z.boolean().optional().default(false),
 });
 export type CreateUserValues = z.infer<typeof createUserSchema>;

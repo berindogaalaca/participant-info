@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import Navbar from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default async function RootLayout({
           <ThemeProvider>
             <Navbar />
             {children}
+            <Toaster />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

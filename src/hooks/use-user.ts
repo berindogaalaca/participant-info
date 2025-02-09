@@ -26,3 +26,12 @@ export const useUpsertUser = () => {
     },
   });
 };
+
+export const useDeleteUser = () => {
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { data } = await axios.delete(`${endpoints.deleteUser}?id=${id}`);
+      return data;
+    },
+  });
+};

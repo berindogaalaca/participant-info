@@ -24,7 +24,10 @@
     "CHECK": "Informationen für Zertifikatskurse erforderlich",
     "SAVE": "Speichern",
     "SUCCESS": "Konto hinzugefügt.",
-    "FAIL": "Fehler bei der Formularübermittlung:"
+    "FAIL": "Fehler bei der Formularübermittlung:",
+    "DELETE": "löschen",
+    "DELETE_SUCCESS": "Benutzer erfolgreich gelöscht",
+    "DELETE_FAIL": "Benutzer konnte nicht gelöscht werden"
   },
   "VALIDATIONS": {
     "FIRST_NAME_REQUIRED": "Vorname ist erforderlich",

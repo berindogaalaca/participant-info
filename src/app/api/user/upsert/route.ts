@@ -1,8 +1,9 @@
 import { ApiResponse } from "@/lib/api-response";
 import { createUserSchema } from "./schema";
 import prisma from "@/lib/prisma";
+import { NextRequest } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const user = await request.json();
 
