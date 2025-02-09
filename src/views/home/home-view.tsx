@@ -24,7 +24,7 @@ export default function HomeView() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center">
-      <Card className="mx-auto p-6 flex items-center justify-between gap-4">
+      <Card className="mx-auto p-6 flex items-center justify-between gap-4 dark:shadow-gray-300 ">
         <h2 className="text-2xl font-medium font-lato leading-8">
           {t("TITLE")}
         </h2>

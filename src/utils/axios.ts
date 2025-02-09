@@ -1,4 +1,4 @@
 export const endpoints = {
-  readUser: "/api/read-user",
-  upsertUser: "/api/upsert-user",
+  readUser: "/api/user/read",
+  upsertUser: "/api/user/upsert",
 };
