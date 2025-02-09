@@ -1,14 +1,26 @@
 "use client";
+
 import Modal from "@/components/home/modal";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useUser } from "@/hooks/use-user";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export default function HomeView() {
   const t = useTranslations("HOME");
-
   const [open, setOpen] = useState(false);
+  const { data, isLoading, error, refetch } = useUser();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  const userData = data?.success ? data.data : null;
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center">
@@ -20,10 +32,15 @@ export default function HomeView() {
           onClick={() => setOpen(true)}
           className="font-semibold text-[22px] leading-8 bg-[#15D2AD] hover:bg-emerald-500 text-white rounded-full px-6 py-3"
         >
-          {t("ADD")}
+          {userData ? t("UPDATE") : t("ADD")}
         </Button>
       </Card>
-      <Modal open={open} onOpenChange={setOpen} />
+      <Modal
+        open={open}
+        onOpenChange={setOpen}
+        initialData={userData}
+        refetch={refetch}
+      />
     </div>
   );
 }

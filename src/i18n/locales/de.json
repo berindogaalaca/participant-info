@@ -1,5 +1,9 @@
 {
-  "HOME": { "TITLE": "Add Participant", "ADD": "Hinzufügen" },
+  "HOME": {
+    "TITLE": "Add Participant",
+    "ADD": "Hinzufügen",
+    "UPDATE": "Aktualisieren"
+  },
   "HEADER": {
     "TITLE": "Add Participant Info"
   },

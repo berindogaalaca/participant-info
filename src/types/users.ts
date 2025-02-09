@@ -1,6 +1,7 @@
 export type User = {
-  firstName: string;
-  lastName: string;
+  id: string;
+  first_name: string;
+  last_name: string;
   phone: string;
   mobile: string;
   email: string;
@@ -8,6 +9,9 @@ export type User = {
   postalCode: string;
   city: string;
   country: string;
-  salutation: string;
+  gender: string;
+  newsletter_name: string;
+  newsletter_email: string;
+  newsletter_gender: string;
   isCheck: boolean;
 };
