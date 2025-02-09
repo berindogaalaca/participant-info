@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useEffect } from "react";
@@ -14,7 +15,7 @@ import {
   CreateUserValues,
 } from "@/app/api/user/upsert/schema";
 import { User } from "@/types/users";
-import { useUpsertUser } from "@/hooks/use-user";
+import { useDeleteUser, useUpsertUser } from "@/hooks/use-user";
 
 interface ModalProps {
   open: boolean;
@@ -34,6 +35,7 @@ export default function Modal({
   const { toast } = useToast();
   const t = useTranslations();
   const { mutate } = useUpsertUser();
+  const deleteUser = useDeleteUser();
 
   const defaultValues: Omit<User, "id" | "createdAt" | "updatedAt"> = {
     first_name: "",
@@ -101,6 +103,36 @@ export default function Modal({
       }
     );
   });
+
+  const handleDelete = (id: string) => {
+    deleteUser.mutate(id, {
+      onSuccess: (data) => {
+        if (data.success) {
+          toast({
+            title: t("FORM.DELETE_SUCCESS"),
+            duration: 3000,
+          });
+          methods.reset(defaultValues);
+          onOpenChange(false);
+          refetch();
+        } else {
+          toast({
+            title: t("FORM.DELETE_FAIL"),
+            variant: "destructive",
+            duration: 3000,
+          });
+        }
+      },
+      onError: (error) => {
+        console.error(t("FORM.DELETE_FAIL"), error);
+        toast({
+          title: t("FORM.DELETE_FAIL"),
+          variant: "destructive",
+          duration: 3000,
+        });
+      },
+    });
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -195,6 +227,14 @@ export default function Modal({
             {t("FORM.SAVE")}
           </Button>
         </FormProvider>
+        {initialData && (
+          <Button
+            onClick={() => handleDelete(initialData?.id)}
+            className="w-1/2 font-semibold text-[20px] leading-8 bg-red-800 hover:bg-red-500 text-white rounded-full px-6 py-3 mt-6"
+          >
+            {t("FORM.DELETE")}
+          </Button>
+        )}
       </DialogContent>
     </Dialog>
   );
