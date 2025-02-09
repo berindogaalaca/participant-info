@@ -1,5 +1,5 @@
 {
-  "HOME": { "TITLE": "Add Participant", "ADD": "Ekle" },
+  "HOME": { "TITLE": "Add Participant", "ADD": "Ekle", "UPDATE": "Güncelle" },
   "HEADER": {
     "TITLE": "Katılımcı Bilgisi Ekle"
   },

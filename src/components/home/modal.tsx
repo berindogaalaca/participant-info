@@ -1,7 +1,6 @@
-import { z } from "zod";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,89 +9,99 @@ import { useToast } from "@/hooks/use-toast";
 import { RHFCheckbox, RHFSelect, RHFTextField } from "../hook-form";
 import { Label } from "../ui/label";
 import { useTranslations } from "next-intl";
+import {
+  createUserSchema,
+  CreateUserValues,
+} from "@/app/api/upsert-user/schema";
+import { User } from "@/types/users";
+import { useUpsertUser } from "@/hooks/use-user";
 
 interface ModalProps {
   open: boolean;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
+  initialData?: User | null;
   onAdd?: () => void;
   buttonText?: string;
+  refetch: () => void;
 }
 
-export default function Modal({ open, onOpenChange }: ModalProps) {
+export default function Modal({
+  open,
+  onOpenChange,
+  initialData,
+  refetch,
+}: ModalProps) {
   const { toast } = useToast();
   const t = useTranslations();
+  const { mutate } = useUpsertUser();
 
-  const UserSchema = z.object({
-    firstName: z
-      .string()
-      .min(1, t("VALIDATIONS.FIRST_NAME_REQUIRED"))
-      .regex(/^[a-zA-ZşŞçÇğĞüÜöÖıİ\s]+$/, t("VALIDATIONS.FIRST_NAME_INVALID")),
-
-    lastName: z
-      .string()
-      .min(1, t("VALIDATIONS.LAST_NAME_REQUIRED"))
-      .regex(/^[a-zA-ZşŞçÇğĞüÜöÖıİ\s]+$/, t("VALIDATIONS.LAST_NAME_INVALID")),
-
-    email: z
-      .string()
-      .min(1, t("VALIDATIONS.EMAIL_REQUIRED"))
-      .email(t("VALIDATIONS.EMAIL_INVALID"))
-      .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, t("VALIDATIONS.EMAIL_INVALID")),
-
-    phone: z.string().min(1, t("VALIDATIONS.PHONE_REQUIRED")),
-    mobile: z.string().min(1, t("VALIDATIONS.PHONE_REQUIRED")),
-
-    city: z.string().min(1, t("VALIDATIONS.CITY_REQUIRED")),
-    address: z.string().min(1, t("VALIDATIONS.ADDRESS_REQUIRED")),
-    country: z.string().min(1, t("VALIDATIONS.COUNTRY_REQUIRED")),
-
-    salutation: z.string().min(1, t("VALIDATIONS.GENDER_REQUIRED")),
-
-    postalCode: z
-      .string()
-      .min(1, t("VALIDATIONS.POSTAL_CODE_REQUIRED"))
-      .regex(/^[0-9]{5}$/, t("VALIDATIONS.POSTAL_CODE_INVALID")),
-
-    isCheck: z
-      .boolean()
-      .refine((val) => val === true, t("VALIDATIONS.TERMS_CONDITIONS")),
-  });
-
-  const defaultValues = {
-    firstName: "",
-    lastName: "",
+  const defaultValues: Omit<User, "id" | "createdAt" | "updatedAt"> = {
+    first_name: "",
+    last_name: "",
     email: "",
     phone: "",
     mobile: "",
-    salutation: "",
+    gender: "",
     country: "",
     city: "",
     address: "",
     postalCode: "",
+    newsletter_name: "",
+    newsletter_email: "",
+    newsletter_gender: "",
     isCheck: false,
   };
-  type UserSchemaType = z.infer<typeof UserSchema>;
-
-  const methods = useForm<UserSchemaType>({
-    resolver: zodResolver(UserSchema),
-    defaultValues,
+  const methods = useForm<CreateUserValues>({
+    resolver: zodResolver(createUserSchema),
+    defaultValues: initialData || defaultValues,
+    shouldUseNativeValidation: false,
   });
 
   const { handleSubmit } = methods;
 
-  const onSubmit = handleSubmit(async () => {
-    try {
-      const values = methods.getValues();
-      console.log(values);
-
-      toast({
-        title: t("FORM.SUCCESS"),
-        duration: 3000,
+  useEffect(() => {
+    if (initialData) {
+      Object.keys(defaultValues).forEach((key) => {
+        methods.setValue(
+          key as keyof CreateUserValues,
+          initialData[key as keyof User]
+        );
       });
-    } catch (error) {
-      console.error(t("FORM.FAIL"), error);
     }
+  }, [initialData, methods]);
+
+  const onSubmit = handleSubmit((values) => {
+    mutate(
+      { ...values, id: initialData?.id || "" },
+      {
+        onSuccess: (data) => {
+          if (data.success) {
+            toast({
+              title: t("FORM.SUCCESS"),
+              duration: 3000,
+            });
+            onOpenChange(false);
+            refetch();
+          } else {
+            toast({
+              title: t("FORM.FAIL"),
+              variant: "destructive",
+              duration: 3000,
+            });
+          }
+        },
+        onError: (error) => {
+          console.error(t("FORM.FAIL"), error);
+          toast({
+            title: t("FORM.FAIL"),
+            variant: "destructive",
+            duration: 3000,
+          });
+        },
+      }
+    );
   });
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="p-10 w-full max-h-[90vh] overflow-y-auto">
@@ -105,7 +114,7 @@ export default function Modal({ open, onOpenChange }: ModalProps) {
               type="email"
             />
             <RHFSelect
-              name="salutation"
+              name="gender"
               placeholder={t("FORM.SALUTATION")}
               options={[
                 {
@@ -120,8 +129,11 @@ export default function Modal({ open, onOpenChange }: ModalProps) {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <RHFTextField name="firstName" placeholder={t("FORM.FIRST_NAME")} />
-            <RHFTextField name="lastName" placeholder={t("FORM.LAST_NAME")} />
+            <RHFTextField
+              name="first_name"
+              placeholder={t("FORM.FIRST_NAME")}
+            />
+            <RHFTextField name="last_name" placeholder={t("FORM.LAST_NAME")} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <RHFTextField name="address" placeholder={t("FORM.ADDRESS")} />
@@ -145,27 +157,30 @@ export default function Modal({ open, onOpenChange }: ModalProps) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <RHFTextField
-              name="email"
+              name="newsletter_email"
               placeholder={t("FORM.EMAIL")}
               type="email"
             />
             <RHFSelect
-              name="salutation"
+              name="newsletter_gender"
               placeholder={t("FORM.SALUTATION")}
               options={[
                 {
-                  label: "Mr",
+                  label: t("FORM.SALUTATION_MR"),
                   value: "Mr",
                 },
                 {
-                  label: "Mrs",
+                  label: t("FORM.SALUTATION_MRS"),
                   value: "Mrs",
                 },
               ]}
-            />{" "}
+            />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <RHFTextField name="firstName" placeholder={t("FORM.FIRST_NAME")} />
+            <RHFTextField
+              name="newsletter_name"
+              placeholder={t("FORM.FIRST_NAME")}
+            />
           </div>
 
           <div className="gap-6 mt-6">

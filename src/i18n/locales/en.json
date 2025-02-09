@@ -1,5 +1,5 @@
 {
-  "HOME": { "TITLE": "Add Participant", "ADD": "Add" },
+  "HOME": { "TITLE": "Add Participant", "ADD": "Add", "UPDATE": "Update" },
   "HEADER": {
     "TITLE": "Add Participant Information"
   },
