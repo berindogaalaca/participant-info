@@ -18,8 +18,6 @@ export const useUser = () => {
 export const useUpsertUser = () => {
   return useMutation({
     mutationFn: async (params: User) => {
-      console.log("Request payload:", params);
-
       const { data } = await axios.post<IResult<any>>(
         endpoints.upsertUser,
         params
