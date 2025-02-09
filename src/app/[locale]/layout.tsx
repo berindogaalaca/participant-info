@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 
 import "./globals.css";
 import Navbar from "@/components/header";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -40,11 +41,16 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body className={`${raleway.variable} ${lato.variable} font-raleway`}>
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        className={`${raleway.variable} ${lato.variable} font-raleway`}
+        suppressHydrationWarning
+      >
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
-          {children}
+          <ThemeProvider>
+            <Navbar />
+            {children}
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

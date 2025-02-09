@@ -36,13 +36,13 @@ export function LanguageSwitcher() {
         <Button
           variant="outline"
           disabled={isPending}
-          className="min-w-[150px]"
+          className="px-6 dark:bg-white dark:text-black"
         >
           <span className="mr-2">{activeLanguage?.flag}</span>
           {activeLanguage?.name || "Language"}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="dark:bg-white dark:text-black">
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}

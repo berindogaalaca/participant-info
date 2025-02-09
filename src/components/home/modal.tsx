@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import {
   createUserSchema,
   CreateUserValues,
-} from "@/app/api/upsert-user/schema";
+} from "@/app/api/user/upsert/schema";
 import { User } from "@/types/users";
 import { useUpsertUser } from "@/hooks/use-user";
 
@@ -104,7 +104,7 @@ export default function Modal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-10 w-full max-h-[90vh] overflow-y-auto">
+      <DialogContent className="p-10 w-full max-h-[90vh] overflow-y-auto dark:border-white">
         <DialogTitle className=""> {t("HEADER.TITLE")}</DialogTitle>
         <FormProvider methods={methods} onSubmit={onSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
@@ -151,7 +151,7 @@ export default function Modal({
             <RHFTextField name="mobile" placeholder={t("FORM.MOBILE")} />
           </div>
           <div className="mt-10">
-            <Label className="text-[#120C6E] text-lg font-semibold leading-6">
+            <Label className="text-[#120C6E] text-lg font-semibold leading-6 dark:text-white">
               {t("FORM.TITLE")}
             </Label>
           </div>
